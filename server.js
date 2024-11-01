@@ -20,6 +20,9 @@ if (!host || !port || !cache) {
 
 // Масив для зберігання нотаток
 let notes = [];
+app.get('/', (req, res) => {
+    res.redirect('/UploadForm.html');
+});
 
 // Маршрут для отримання нотатки за ім'ям
 app.get('/notes/:name', (req, res) => {
@@ -76,12 +79,12 @@ app.post('/write', (req, res) => {
     return res.status(201).send('Created');
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Маршрут для відображення HTML-форми
 app.get('/UploadForm.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'UploadForm.html'));
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, host, () => {
     console.log(`Server is running on http://${host}:${port}`);
