@@ -2,12 +2,9 @@ const { program } = require('commander');
 const express = require('express');
 const path = require('path'); 
 const app = express();
-
-// Middleware для парсингу JSON та form-data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Налаштування командних параметрів
 program
     .requiredOption('-h, --host <host>', 'server address')
     .requiredOption('-p, --port <port>', 'server port')
