@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js -h localhost -p 8080 -c ./cache"
+    "dev": "node server.js -h localhost -p 8080 -c ./cache"
 },
   "keywords": [],
   "author": "",
