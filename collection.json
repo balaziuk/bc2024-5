@@ -19,7 +19,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:8080/notes/MyNote1",
+					"raw": "http://localhost:8080/notes/MyNote",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -27,7 +27,7 @@
 					"port": "8080",
 					"path": [
 						"notes",
-						"MyNote1"
+						"MyNote"
 					]
 				}
 			},
@@ -37,18 +37,24 @@
 			"name": "update note by name",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"text\": \"New text\"\r\n}",
+					"raw": "new text 123",
 					"options": {
 						"raw": {
-							"language": "json"
+							"language": "text"
 						}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/notes/MyNote1",
+					"raw": "http://localhost:8080/notes/MyNote",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -56,7 +62,7 @@
 					"port": "8080",
 					"path": [
 						"notes",
-						"MyNote1"
+						"MyNote"
 					]
 				}
 			},
@@ -68,7 +74,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/notes/MyNote1",
+					"raw": "http://localhost:8080/notes/MyNote",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -76,7 +82,7 @@
 					"port": "8080",
 					"path": [
 						"notes",
-						"MyNote1"
+						"MyNote"
 					]
 				}
 			},
@@ -107,16 +113,16 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "note_name",
-							"value": "MyNote2",
+							"value": "MyNote",
 							"type": "text"
 						},
 						{
 							"key": "note",
-							"value": "this is my second note",
+							"value": "my first note",
 							"type": "text"
 						}
 					]

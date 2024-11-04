@@ -1,9 +1,12 @@
 const { program } = require('commander');
 const express = require('express');
-const path = require('path'); 
+const path = require('path');
+const multer = require('multer');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const upload = multer();
 
 program
     .requiredOption('-h, --host <host>', 'server address')
@@ -34,25 +37,28 @@ app.get('/notes/:name', (req, res) => {
     return res.send(note.text);
 });
 
-// Маршрут для оновлення нотатки
-app.put('/notes/:name', (req, res) => {
+// Маршрут для оновлення тексту нотатки
+app.put('/notes/:name', express.text(), (req, res) => {
     const noteName = req.params.name;
+    const newText = req.body;
+
     const note = notes.find(n => n.name === noteName);
     if (!note) {
         return res.status(404).send('Not found');
     }
-    note.text = req.body.text;
+
+    note.text = newText;
     return res.send(note);
 });
 
 // Маршрут для видалення нотатки
-app.delete('/notes/:name', (req, res) => {  
+app.delete('/notes/:name', (req, res) => {
     const noteName = req.params.name;
     const noteIndex = notes.findIndex(note => note.name === noteName);
     if (noteIndex === -1) {
         return res.status(404).send('Not found');
     }
-    notes.splice(noteIndex, 1); 
+    notes.splice(noteIndex, 1);
     return res.status(204).send();
 });
 
@@ -62,10 +68,9 @@ app.get('/notes', (req, res) => {
 });
 
 // Маршрут для створення нової нотатки
-app.post('/write', (req, res) => {
+app.post('/write', upload.none(), (req, res) => {
     const { note_name, note } = req.body;
 
-    // Перевірка наявності полів
     if (!note_name || !note) {
         return res.status(400).send('Note name and text are required');
     }
